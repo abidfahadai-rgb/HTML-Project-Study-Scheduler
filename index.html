@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Scheduler - Home</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js"></script>
+</head>
+
+<body data-page="home">
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">
+                The Study Scheduler
+                <small>EST. 2026 - ADELAIDE</small>
+            </div>
+            <nav class="site-nav">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="login.html">Scheduler</a></li>
+                    <li><a href="summary.html">Summary</a></li>
+                    <li><a href="blog.html">Project Log</a></li>
+                    <li><a href="ethics.html">Ethics</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="hero">
+            <div class="small-line">A Personal Study Companion</div>
+            <h1>The Study Scheduler</h1>
+            <p class="tagline">
+                A quiet, considered place to manage your assignments,
+                deadlines and study habits.
+            </p>
+            <a href="login.html" class="btn">Enter the Scheduler</a>
+        </section>
+
+        <div class="divider">&#9670;</div>
+
+        <section class="gallery">
+            <h2>Scenes of Scholarship</h2>
+            <p class="tagline">Press the button to change the image.</p>
+
+            <div class="gallery-frame">
+                <img id="gallery-img" src="" alt="A study scene">
+            </div>
+            <p class="gallery-caption" id="gallery-caption"></p>
+
+            <div class="gallery-buttons">
+                <button class="btn btn-outline" onclick="prevImage()">Previous</button>
+                <button class="btn" onclick="nextImage()">Next Image</button>
+            </div>
+        </section>
+
+        <div class="divider">&#9670;</div>
+
+        <section class="two-columns">
+
+            <div class="column card">
+                <h2>About the Application</h2>
+                <p>
+                    <em>The Study Scheduler</em> is a lightweight web
+                    application made to help university students keep
+                    their academic life in order. From assignment
+                    deadlines to revision sessions, every task finds
+                    its proper place.
+                </p>
+                <p>
+                    The goal is to feel less like a noisy to-do list
+                    and more like a personal almanac kept on your desk.
+                </p>
+                <h3>Key Features</h3>
+                <ul class="styled-list">
+                    <li>Login system with personal accounts</li>
+                    <li>Add, edit and delete study tasks</li>
+                    <li>Course code, due date, priority, and notes</li>
+                    <li>Overdue tasks highlighted in red</li>
+                    <li>Filter tasks by subject, status or date</li>
+                    <li>Live clock at the bottom of every page</li>
+                </ul>
+            </div>
+
+            <div class="column card">
+                <h2>About the Author</h2>
+                <p>
+                    My name is <strong>Abid Fahad Khan</strong>, and I am a
+                    student at the Adelaide University.
+                </p>
+                <p>
+                    I keep my own study load in order with a mix of
+                    Pomodoro-style focus sessions, weekly planning,
+                    and a great deal of strong coffee. Subjects I am
+                    presently working through include
+                    <em>INFO1012 - Information Technology Systems</em>
+                    and front-end web development.
+                </p>
+                <p>
+                    This project is my Assignment 3 submission for
+                    INFO1012, and a practical tool I use myself.
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="clock" id="live-clock">Loading time...</div>
+            <div>&copy; 2026 Abid Fahad Khan - The Study Scheduler - Built for INFO1012</div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

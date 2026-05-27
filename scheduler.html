@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Scheduler - Manage Tasks</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js"></script>
+</head>
+<body data-page="scheduler">
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">
+                The Study Scheduler
+                <small>EST. 2026 - ADELAIDE</small>
+            </div>
+            <nav class="site-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="scheduler.html" class="active">Scheduler</a></li>
+                    <li><a href="summary.html">Summary</a></li>
+                    <li><a href="blog.html">Project Log</a></li>
+                    <li><a href="ethics.html">Ethics</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <div class="user-bar" id="user-bar"></div>
+
+        <div class="hero">
+            <div class="small-line">Your Personal Planner</div>
+            <h1>Manage Your Study Tasks</h1>
+            <p class="tagline">Add new assignments and tick them off as you go.</p>
+        </div>
+
+        <div class="scheduler-layout">
+
+            <div class="form-side card">
+                <h2 id="form-title">Add a Task</h2>
+
+                <div class="field">
+                    <label for="t-title">Task Title</label>
+                    <input type="text" id="t-title" placeholder="e.g. Complete Assignment 3">
+                    <div class="error-msg" id="err-title"></div>
+                </div>
+
+                <div class="field">
+                    <label for="t-code">Course Code</label>
+                    <input type="text" id="t-code" placeholder="e.g. INFO1012">
+                    <div class="error-msg" id="err-code"></div>
+                </div>
+
+                <div class="field">
+                    <label for="t-name">Course Name</label>
+                    <input type="text" id="t-name" placeholder="e.g. Information Technology Systems">
+                    <div class="error-msg" id="err-name"></div>
+                </div>
+
+                <div class="field">
+                    <label for="t-date">Due Date</label>
+                    <input type="date" id="t-date">
+                    <div class="error-msg" id="err-date"></div>
+                </div>
+
+                <div class="field">
+                    <label for="t-priority">Priority</label>
+                    <select id="t-priority">
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="t-desc">Description</label>
+                    <textarea id="t-desc" placeholder="What does this task involve?"></textarea>
+                    <div class="error-msg" id="err-description"></div>
+                </div>
+
+                <div class="field">
+                    <label for="t-notes">Additional Notes (optional)</label>
+                    <textarea id="t-notes" placeholder="Anything else worth remembering"></textarea>
+                </div>
+
+                <button class="btn" id="submit-btn" onclick="submitTaskForm()">Add Task</button>
+                <button class="btn btn-outline hidden" id="cancel-btn" onclick="cancelEdit()">Cancel Edit</button>
+            </div>
+
+            <div class="tasks-side">
+                <h2>Your Tasks</h2>
+                <div class="task-summary" id="task-summary">No tasks yet.</div>
+
+                <div class="filters">
+                    <label for="filter-subject">Subject:</label>
+                    <select id="filter-subject" onchange="showTasks()">
+                        <option value="">All subjects</option>
+                    </select>
+
+                    <label for="filter-status">Status:</label>
+                    <select id="filter-status" onchange="showTasks()">
+                        <option value="">All</option>
+                        <option value="outstanding">Outstanding</option>
+                        <option value="completed">Completed</option>
+                        <option value="overdue">Overdue</option>
+                    </select>
+
+                    <label for="filter-range">Range:</label>
+                    <select id="filter-range" onchange="showTasks()">
+                        <option value="">Any time</option>
+                        <option value="today">Today</option>
+                        <option value="week">Next 7 days</option>
+                        <option value="month">Next 30 days</option>
+                    </select>
+                </div>
+
+                <div id="task-list"></div>
+            </div>
+
+        </div>
+
+        <div class="modal-bg hidden" id="delete-modal">
+            <div class="modal-box">
+                <h3>Delete this Task?</h3>
+                <p>This action cannot be undone. Are you sure?</p>
+                <button class="btn btn-outline" onclick="cancelDelete()">Keep It</button>
+                <button class="btn btn-danger" onclick="confirmDelete()">Yes, Delete</button>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="clock" id="live-clock">Loading time...</div>
+            <div>&copy; 2026 Abid Fahad - The Study Scheduler - Built for INFO1012</div>
+        </div>
+    </footer>
+
+</body>
+</html>

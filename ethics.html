@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Scheduler - Ethics and Privacy</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js"></script>
+</head>
+<body data-page="ethics">
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">
+                The Study Scheduler
+                <small>EST. 2026 - ADELAIDE</small>
+            </div>
+            <nav class="site-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="login.html">Scheduler</a></li>
+                    <li><a href="summary.html">Summary</a></li>
+                    <li><a href="blog.html">Project Log</a></li>
+                    <li><a href="ethics.html" class="active">Ethics</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <div class="hero">
+            <div class="small-line">A Considered Approach</div>
+            <h1>Ethics and Privacy Reflection</h1>
+            <p class="tagline">
+                On the responsibilities that come with handling a
+                student's personal study data.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>The Premise</h2>
+            <p>
+                Even a small student-built application is, in a meaningful
+                sense, handling personal data. Coursework titles, deadlines,
+                and notes may reveal that a user is struggling with a
+                subject, working ahead, or making private observations
+                they would rather keep to themselves.
+            </p>
+            <p>
+                Building this scheduler responsibly meant thinking about
+                three things: who can see the data, what data we collect
+                in the first place, and how we handle what users put in.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Features Supporting Ethical Data Use</h2>
+
+            <h3>Restricted access through login</h3>
+            <p>
+                The scheduler and summary pages are both guarded by a
+                <code>requireLogin()</code> check. A user who reaches
+                those URLs without an active session is redirected back
+                to the login screen. Each task also carries an
+                <code>owner</code> field, so two accounts in the same
+                browser cannot see each other's tasks.
+            </p>
+
+            <h3>Input validation and text escaping</h3>
+            <p>
+                Every form input is validated before being accepted.
+                Empty required fields are rejected, dates in the past
+                are refused, and clear error messages are shown to the
+                user.
+            </p>
+            <p>
+                Every piece of user-typed text is passed through an
+                <code>escapeText()</code> helper before being written
+                to the page. This means a user cannot accidentally or
+                maliciously store HTML or JavaScript that would later
+                run when their tasks are displayed.
+            </p>
+
+            <h3>Honest error messages</h3>
+            <p>
+                When something goes wrong - a wrong password, an invalid
+                date, a missing field - the user is told plainly. But
+                the login form does not say whether the username exists
+                or just the password is wrong, because telling the user
+                that would help attackers guess valid usernames.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Features Supporting Data Privacy</h2>
+
+            <h3>Data minimisation</h3>
+            <p>
+                The application collects only what it needs. Username
+                and password for authentication; for tasks, only title,
+                course, date, description, and optional notes. No email,
+                no real name, no phone number, no date of birth, no
+                location is asked for. The less we collect, the less
+                there is to lose.
+            </p>
+
+            <h3>Local-only storage</h3>
+            <p>
+                Every piece of data the application stores - accounts,
+                sessions, and tasks - lives in the browser's
+                <code>localStorage</code>. Nothing is sent to a server.
+                No analytics. No tracking. When the user clears their
+                browser data, the application's record of them is gone.
+            </p>
+
+            <h3>User control</h3>
+            <p>
+                Users can delete any task at any time. The deletion is
+                confirmed first with a popup, to prevent accidents. They
+                can also log out, which clears the session immediately.
+                There is no hidden retention and no "soft delete".
+            </p>
+
+            <h3>Acknowledged limitations</h3>
+            <p>
+                In the interest of honesty: this scheduler is a learning
+                project. Passwords are stored in plain text in
+                <code>localStorage</code>, which is not secure. A real
+                application would hash passwords with a strong algorithm
+                like bcrypt, send them over HTTPS, and keep them on a
+                server with proper session tokens. None of these are
+                possible in a simple client-side project, so the README,
+                this page, and the source code itself all say so plainly.
+                Being honest about limitations is itself a privacy
+                practice - users cannot consent to risks that are
+                hidden from them.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Worked Examples</h2>
+            <ul class="styled-list">
+                <li>
+                    <strong>Required fields, but no surveillance fields.</strong>
+                    The task form asks for things the user benefits from
+                    recording. It does not ask where they study, when,
+                    or for how long.
+                </li>
+                <li>
+                    <strong>Owner-stamped records.</strong> Every task
+                    carries the username of its creator. Users cannot
+                    see each other's tasks even when they share a browser.
+                </li>
+                <li>
+                    <strong>Confirmation before deletion.</strong> A
+                    popup asks the user to confirm before any task is
+                    deleted.
+                </li>
+                <li>
+                    <strong>Text escaping on display.</strong> A task
+                    titled <code>&lt;script&gt;alert(1)&lt;/script&gt;</code>
+                    appears on the page as text, not as a running script.
+                </li>
+                <li>
+                    <strong>Honest about plain-text passwords.</strong>
+                    This page, the README, and the source code all state
+                    that the login system is for learning purposes only.
+                </li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>A Closing Thought</h2>
+            <p style="font-style: italic; font-size: 18px; color: #5a4f43;">
+                Good privacy practice rarely looks like a feature.
+                It looks like a question that was asked early and
+                answered carefully: <em>do we really need this?</em>
+                If the answer is no, the responsible choice is also,
+                very often, the simpler one.
+            </p>
+        </div>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="clock" id="live-clock">Loading time...</div>
+            <div>&copy; 2026 Abid Fahad - The Study Scheduler - Built for INFO1012</div>
+        </div>
+    </footer>
+
+</body>
+</html>

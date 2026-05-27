@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Scheduler - Project Log</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js"></script>
+</head>
+<body data-page="blog">
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">
+                The Study Scheduler
+                <small>EST. 2026 - ADELAIDE</small>
+            </div>
+            <nav class="site-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="login.html">Scheduler</a></li>
+                    <li><a href="summary.html">Summary</a></li>
+                    <li><a href="blog.html" class="active">Project Log</a></li>
+                    <li><a href="ethics.html">Ethics</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <div class="hero">
+            <div class="small-line">Behind the Scenes</div>
+            <h1>Project Plan and Troubleshooting Log</h1>
+            <p class="tagline">
+                The plan that guided the build, and the bugs that tested it.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Why Agile?</h2>
+            <p>
+                The Agile methodology, from the Agile Manifesto of 2001,
+                values adaptive planning, frequent delivery, and continual
+                feedback over rigid up-front specification. Even for a
+                solo three-week project, several Agile practices were
+                helpful:
+            </p>
+            <ul class="styled-list">
+                <li>
+                    <strong>Weekly sprints</strong> - splitting the build
+                    into one-week iterations meant each week ended with
+                    a working product instead of one panicked final push.
+                </li>
+                <li>
+                    <strong>Working software first</strong> - the login
+                    flow was built and tested before writing about it.
+                </li>
+                <li>
+                    <strong>Responding to change</strong> - the task
+                    model gained a priority field mid-project because
+                    sorting by date alone was not enough.
+                </li>
+                <li>
+                    <strong>Retrospectives</strong> - each sprint ended
+                    with a short note in the README about what to improve.
+                </li>
+            </ul>
+        </div>
+
+        <h2>Three-Week Sprint Plan</h2>
+        <table class="sprint-table">
+            <thead>
+                <tr>
+                    <th>Phase</th>
+                    <th>Sprint 1 - Week 1</th>
+                    <th>Sprint 2 - Week 2</th>
+                    <th>Sprint 3 - Week 3</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="phase-name">Planning</td>
+                    <td>Read the brief, list required features, set up GitHub, write first README.</td>
+                    <td>Review Sprint 1, re-prioritise backlog, push task editing higher.</td>
+                    <td>Plan final polish: ethics page, blog write-up, screenshots, README finalisation.</td>
+                </tr>
+                <tr>
+                    <td class="phase-name">Analysis</td>
+                    <td>Identify user stories: log in, add tasks, view tasks, delete tasks.</td>
+                    <td>Analyse usability of Sprint 1 - note missing edit and missing priority.</td>
+                    <td>Review against marking rubric, identify gaps in validation and accessibility.</td>
+                </tr>
+                <tr>
+                    <td class="phase-name">Design</td>
+                    <td>Sketch wireframes for home, login, scheduler. Choose old-money palette.</td>
+                    <td>Design task card, filter bar, delete modal. Pick CSS colours.</td>
+                    <td>Design blog tables, screenshot placeholders, decorative dividers.</td>
+                </tr>
+                <tr>
+                    <td class="phase-name">Implementation</td>
+                    <td>Build HTML/CSS for home, login, scheduler skeleton. Add/list tasks working.</td>
+                    <td>Add edit, delete with confirm modal, priorities, filters, summary page.</td>
+                    <td>Write blog, ethics page, polish styles, write README and licence.</td>
+                </tr>
+                <tr>
+                    <td class="phase-name">Testing and Maintenance</td>
+                    <td>Manual testing in Chrome and Firefox. Fix login state leaking.</td>
+                    <td>Cross-browser test, fix date-comparison bug, test mobile layout.</td>
+                    <td>Final regression test of every flow, verify forms validate, verify clock.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="divider">&#9670;</div>
+
+        <h2>Troubleshooting Log</h2>
+
+        <div class="bug-box">
+            <h3>Bug #1 - Same-day tasks marked as overdue</h3>
+            <div class="bug-date">Encountered: 04 November 2025 at 21:14</div>
+
+            <p>
+                Tasks added with today's date were appearing in the list
+                immediately marked as overdue and shown in red, even though
+                their deadline had not yet passed.
+            </p>
+
+            <h4>Failing screenshot</h4>
+            <div class="screenshot-box problem">
+                [ Screenshot: task "Read Chapter 4" with due date today
+                showing in red as overdue, even though it is not overdue ]
+            </div>
+
+            <h4>Code that caused the issue</h4>
+<pre class="code">// Original buggy isOverdue function
+function isOverdue(task) {
+    if (task.completed === true) {
+        return false;
+    }
+    // PROBLEM: This compares the full timestamp.
+    // "Today at 00:00" is always less than "now",
+    // so today's tasks appear overdue.
+    var dueDate = new Date(task.date);
+    if (dueDate &lt; new Date()) {
+        return true;
+    }
+    return false;
+}</pre>
+
+            <h4>Resolution</h4>
+            <div class="bug-date">Resolved: 04 November 2025 at 22:02</div>
+
+            <div class="screenshot-box solved">
+                [ Screenshot: same task now showing normally with no
+                overdue styling on its due date ]
+            </div>
+
+            <h4>Corrected code</h4>
+<pre class="code">// Fixed isOverdue - both dates compared at start of day
+function isOverdue(task) {
+    if (task.completed === true) {
+        return false;
+    }
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);  // reset time to midnight
+    var dueDate = new Date(task.date);
+    if (dueDate &lt; today) {
+        return true;
+    }
+    return false;
+}</pre>
+
+            <h4>Explanation</h4>
+            <p>
+                The original comparison used <code>new Date()</code> on
+                the right side, which returns the current moment in time.
+                But <code>new Date(task.date)</code> on the left side made
+                a date at midnight (start of the day). Since midnight is
+                always earlier than the current time, every task created
+                on its due day looked overdue.
+            </p>
+            <p>
+                The fix was to call <code>setHours(0, 0, 0, 0)</code> on
+                the "today" date so both sides are compared at the start
+                of the day. I learned about this from the MDN
+                documentation on the JavaScript Date object.
+            </p>
+        </div>
+
+        <div class="bug-box">
+            <h3>Bug #2 - Tasks from one account showing for another</h3>
+            <div class="bug-date">Encountered: 09 November 2025 at 15:38</div>
+
+            <p>
+                When I created two test accounts in the same browser,
+                the tasks from the first account appeared in the second
+                account's task list. This was a data privacy issue.
+            </p>
+
+            <h4>Failing screenshot</h4>
+            <div class="screenshot-box problem">
+                [ Screenshot: account "alice" signed in, but showing
+                three tasks that were originally created under "bob" ]
+            </div>
+
+            <h4>Code that caused the issue</h4>
+<pre class="code">// Original buggy getMyTasks - returned ALL tasks
+function getMyTasks() {
+    return getAllTasks();  // BUG: no filtering by owner
+}
+
+// Original createTask had no owner field
+function createTask(data) {
+    var allTasks = getAllTasks();
+    var newTask = {
+        id: "task_" + Date.now(),
+        title: data.title
+        // ... rest of fields, but no owner!
+    };
+    allTasks.push(newTask);
+    saveAllTasks(allTasks);
+}</pre>
+
+            <h4>Resolution</h4>
+            <div class="bug-date">Resolved: 09 November 2025 at 16:21</div>
+
+            <div class="screenshot-box solved">
+                [ Screenshot: account "alice" now sees an empty task list,
+                while bob's tasks remain visible only to him ]
+            </div>
+
+            <h4>Corrected code</h4>
+<pre class="code">// Fixed getMyTasks - filters by logged-in user
+function getMyTasks() {
+    var user = getCurrentUser();
+    var all = getAllTasks();
+    var mine = [];
+    for (var i = 0; i &lt; all.length; i++) {
+        if (all[i].owner === user) {
+            mine.push(all[i]);
+        }
+    }
+    return mine;
+}
+
+// Fixed createTask - stamps owner on every new task
+var newTask = {
+    id: "task_" + Date.now(),
+    owner: getCurrentUser(),  // FIX: save who made it
+    title: title,
+    // ... other fields
+};</pre>
+
+            <h4>Explanation</h4>
+            <p>
+                The problem was simple: I was storing all tasks in one
+                big list with no way to know who owned which task.
+                <code>localStorage</code> is shared across the whole site,
+                so everyone saw the same list.
+            </p>
+            <p>
+                The fix was to add an <code>owner</code> field to each
+                task when it is created, and then filter by that field
+                when reading. I read about user data isolation on the
+                MDN page about Web Storage. I also added this as an
+                example on the Ethics page to show why login-based
+                isolation matters.
+            </p>
+        </div>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="clock" id="live-clock">Loading time...</div>
+            <div>&copy; 2026 Abid Fahad - The Study Scheduler - Built for INFO1012</div>
+        </div>
+    </footer>
+
+</body>
+</html>

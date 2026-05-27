@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Scheduler - Summary</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js"></script>
+</head>
+<body data-page="summary">
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">
+                The Study Scheduler
+                <small>EST. 2026 - ADELAIDE</small>
+            </div>
+            <nav class="site-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="scheduler.html">Scheduler</a></li>
+                    <li><a href="summary.html" class="active">Summary</a></li>
+                    <li><a href="blog.html">Project Log</a></li>
+                    <li><a href="ethics.html">Ethics</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <div class="user-bar" id="user-bar"></div>
+
+        <div class="hero">
+            <div class="small-line">Reflection and Review</div>
+            <h1>Task Summary</h1>
+            <p class="tagline">
+                Filter by time period, subject, or status to see what
+                was completed and what remains.
+            </p>
+        </div>
+
+        <div class="filters">
+            <label for="filter-subject">Subject:</label>
+            <select id="filter-subject" onchange="showTasks()">
+                <option value="">All subjects</option>
+            </select>
+
+            <label for="filter-status">Status:</label>
+            <select id="filter-status" onchange="showTasks()">
+                <option value="">All</option>
+                <option value="outstanding">Outstanding</option>
+                <option value="completed">Completed</option>
+                <option value="overdue">Overdue</option>
+            </select>
+
+            <label for="filter-range">Range:</label>
+            <select id="filter-range" onchange="showTasks()">
+                <option value="">Any time</option>
+                <option value="today">Today</option>
+                <option value="week">Next 7 days</option>
+                <option value="month">Next 30 days</option>
+                <option value="last-week">Last 7 days</option>
+            </select>
+        </div>
+
+        <div class="task-summary" id="task-summary">No tasks yet.</div>
+
+        <div id="task-list"></div>
+
+        <div class="modal-bg hidden" id="delete-modal">
+            <div class="modal-box">
+                <h3>Delete this Task?</h3>
+                <p>This action cannot be undone. Are you sure?</p>
+                <button class="btn btn-outline" onclick="cancelDelete()">Keep It</button>
+                <button class="btn btn-danger" onclick="confirmDelete()">Yes, Delete</button>
+            </div>
+        </div>
+
+        <div class="divider">&#9670;</div>
+
+        <p class="text-center" style="font-style: italic; color: #5a4f43;">
+            "What gets measured gets managed." - Peter Drucker
+        </p>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="clock" id="live-clock">Loading time...</div>
+            <div>&copy; 2026 Abid Fahad - The Study Scheduler - Built for INFO1012</div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Scheduler - Sign In</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js"></script>
+</head>
+<body data-page="login">
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">
+                The Study Scheduler
+                <small>EST. 2026 - ADELAIDE</small>
+            </div>
+            <nav class="site-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="login.html" class="active">Scheduler</a></li>
+                    <li><a href="summary.html">Summary</a></li>
+                    <li><a href="blog.html">Project Log</a></li>
+                    <li><a href="ethics.html">Ethics</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="auth-wrap">
+
+        <div class="auth-box" id="login-panel">
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Please sign in to continue.</p>
+
+            <div class="field">
+                <label for="login-username">Username</label>
+                <input type="text" id="login-username">
+            </div>
+            <div class="field">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password">
+            </div>
+
+            <div class="error-msg" id="login-error"></div>
+
+            <button class="btn full-width" onclick="doLogin()">Sign In</button>
+
+            <div class="demo-info">
+                <strong>Demo Account</strong>
+                You can sign in with: username <code>demo</code> and
+                password <code>study2025</code>.
+            </div>
+
+            <p class="switch-link">
+                Don't have an account?
+                <a href="#" onclick="showSignup(); return false;">Create one</a>
+            </p>
+        </div>
+
+        <div class="auth-box hidden" id="signup-panel">
+            <h2>Create an Account</h2>
+            <p class="subtitle">A new chapter for your studies.</p>
+
+            <div class="field">
+                <label for="signup-username">Choose a Username</label>
+                <input type="text" id="signup-username">
+            </div>
+            <div class="field">
+                <label for="signup-password">Password (6+ characters)</label>
+                <input type="password" id="signup-password">
+            </div>
+            <div class="field">
+                <label for="signup-confirm">Confirm Password</label>
+                <input type="password" id="signup-confirm">
+            </div>
+
+            <div class="error-msg" id="signup-error"></div>
+
+            <button class="btn full-width" onclick="doSignup()">Create Account</button>
+
+            <p class="switch-link">
+                Already have an account?
+                <a href="#" onclick="showLogin(); return false;">Sign in</a>
+            </p>
+        </div>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="clock" id="live-clock">Loading time...</div>
+            <div>&copy; 2026 Abid Fahad - The Study Scheduler - Built for INFO1012</div>
+        </div>
+    </footer>
+
+</body>
+</html>
